@@ -14,9 +14,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Container } from "@mui/system";
 import Link from "next/link";
 import * as React from "react";
+
+import { navItems } from "@/models/navItems";
 
 interface Props {
   /**
@@ -28,7 +29,7 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+// const navItems = ["Home", "About", "Contact"];
 
 export default function MyAppBar(props: Props) {
   const { window, children } = props;
@@ -46,9 +47,13 @@ export default function MyAppBar(props: Props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton
+              component={Link}
+              href={item.url}
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -87,6 +92,11 @@ export default function MyAppBar(props: Props) {
     }
   `;
 
+  const mainStyle = css`
+    width: 100vw;
+    height: 100vh;
+  `;
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -115,8 +125,8 @@ export default function MyAppBar(props: Props) {
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+              <Button key={item.name} href={item.url} sx={{ color: "#fff" }}>
+                {item.name}
               </Button>
             ))}
           </Box>
@@ -142,10 +152,11 @@ export default function MyAppBar(props: Props) {
           {drawer}
         </Drawer>
       </Box>
-      <Container component="main" sx={{ p: 3 }}>
+      <Box component="main" css={mainStyle}>
         <Toolbar />
+        {/* <Typography>AAA</Typography> */}
         {children}
-      </Container>
+      </Box>
     </Box>
   );
 }

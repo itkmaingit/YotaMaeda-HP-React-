@@ -12,7 +12,7 @@ const PicturesPage: NextPage<{ fileContents: string[] }> = ({
   return (
     <Carousel>
       {fileContents.map((fileContent) => (
-        <Image src={fileContent} alt="image" />
+        <Image src={fileContent} alt="image" width="500" height="500" />
       ))}
     </Carousel>
   );
@@ -32,9 +32,11 @@ export const getStaticProps: GetStaticProps<{
 
   // ファイルの中身を配列に保存
   const fileContents = fileNames.map((fileName) => {
-    const filePath = path.join(projectPath, fileName);
-    console.log(filePath);
-    return filePath;
+    const filePath = path.join(folderPath, fileName);
+    const relativePath = path.relative(projectPath, filePath);
+    const publicPath = "/" + relativePath;
+    console.log(publicPath);
+    return publicPath;
   });
   return {
     props: { fileContents },
