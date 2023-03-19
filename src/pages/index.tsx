@@ -1,82 +1,43 @@
 /** @jsxImportSource @emotion/react */
+import { centerAlignStyle } from "@/styles/utilStyle";
 import { css } from "@emotion/react";
-import Image from "next/image";
-
-import theme from "@/theme";
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { promises as fs } from "fs";
+import { GetStaticProps, NextPage } from "next";
+import Image from "next/image";
+import path from "path";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.css";
+import SectionSeparater from "../components/SectionSeparater";
 
-const profilePictureUrl = "/images/background-image.jpg";
+export const getStaticProps: GetStaticProps<{
+  fileContents: string[];
+}> = async () => {
+  // フォルダのパス
+  const folderPath = path.join("public", "images");
+  const projectPath = path.join("images");
 
-const IndexPage = () => {
-  const profilePictureStyle = css`
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: 24px;
-  `;
+  // フォルダ内のファイル名を取得
+  const fileNames = await fs.readdir(folderPath);
 
-  const statusText = css`
-    color: ${theme.palette.grey.A400};
-  `;
+  // ファイルの中身を配列に保存
+  const fileContents = fileNames.map((fileName) => {
+    const filePath = path.join(folderPath, fileName);
+    const relativePath = path.relative(projectPath, filePath);
+    const publicPath = "/" + relativePath;
+    console.log(publicPath);
+    return publicPath;
+  });
 
-  const keywordText = css`
-    color: ${theme.palette.primary.light};
-  `;
+  //ex) fileContents=["/images/aaa.jpeg", "/images/bbb.png",...]
+  return {
+    props: { fileContents },
+  };
+};
 
-  const borderColor = css`
-    border-color: #000000;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 5px;
-    padding: 5px;
-  `;
-
-  // const borderStyle = css`
-  //   border-color: ${theme.palette.primary.main};
-  //   border-width: 1px;
-  //   border-style: solid;
-  // `;
-
-  const containerStyle = css`
-    position: relative;
-    width: 300px;
-    /* height: 300px; */
-  `;
-
-  const absoluteBoxStyle = css`
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: red;
-    width: 50%;
-    height: 50%;
-  `;
-
-  const textStyle = css`
-    position: relative;
-    /* top: 100px; */
-  `;
-
-  const snsButtonStyle = css`
-    margin: 8px;
-  `;
-
-  const heroSectionStyle = css`
-    position: relative;
-    width: 100%;
-    height: 50vh;
-  `;
-
-  const heroImageStyle = css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  `;
+const IndexPage: NextPage<{ fileContents: string[] }> = ({ fileContents }) => {
+  const profilePictureUrl = "/images/background-image.jpg";
 
   const heroTextStyle = css`
     position: absolute;
@@ -87,47 +48,49 @@ const IndexPage = () => {
     text-align: center;
   `;
 
-  const sampleStyle = css`
+  const firstViewStyle = css`
     position: relative;
     left: 0px;
     width: 100%;
     height: 50vh;
   `;
 
+  const backGroundImageStyle = css`
+    object-fit: cover;
+  `;
+
+  const containImageStyle = css`
+    object-fit: contain;
+  `;
+
+  const testImageStyle = css`
+    object-fit: cover;
+    /* position: relative !important; */
+  `;
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Box css={sampleStyle}>
+      <Box css={firstViewStyle}>
         <Image
           src={profilePictureUrl}
           alt="Hero Image"
-          layout="fill"
-          objectFit="cover"
+          fill
+          css={backGroundImageStyle}
         />
         <Typography variant="h3" css={heroTextStyle}>
           Yota Maeda's Official site
         </Typography>
       </Box>
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          height: "30vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "gray",
-        }}
-      >
-        <Typography>下向き矢印</Typography>
-      </Box>
+      <SectionSeparater text="他ページへのリンク"></SectionSeparater>
+
       <Box>
         <Grid container>
-          <Grid item md={6}>
+          <Grid item md={6} sx={{ position: "relative", height: "10em" }}>
             <Image
               src={profilePictureUrl}
               alt="Hero Image"
-              width={500}
-              height={300}
+              fill
+              css={testImageStyle}
             />
           </Grid>
           <Grid
@@ -137,6 +100,7 @@ const IndexPage = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              flexDirection: "column",
             }}
           >
             <Typography>Papersのリンク</Typography>
@@ -152,15 +116,41 @@ const IndexPage = () => {
           >
             <Typography>Talksのリンク</Typography>
           </Grid>
-          <Grid item>
+          <Grid item md={6} sx={{ position: "relative", height: "10em" }}>
             <Image
               src={profilePictureUrl}
               alt="Hero Image"
-              width={500}
-              height={300}
+              fill
+              css={testImageStyle}
             />
           </Grid>
         </Grid>
+      </Box>
+      <Box sx={{ position: "relative", width: "50vw" }}>
+        <Image
+          src={profilePictureUrl}
+          alt="Hero Image"
+          fill
+          css={testImageStyle}
+        />
+      </Box>
+
+      <SectionSeparater text="Pictures"></SectionSeparater>
+
+      <Carousel>
+        {fileContents.map((fileContent) => (
+          <Image src={fileContent} alt="image" width="500" height="500" />
+        ))}
+      </Carousel>
+
+      <SectionSeparater text="Blog"></SectionSeparater>
+      <Box
+        sx={{ height: "20em", backgroundColor: "grey" }}
+        css={centerAlignStyle}
+      >
+        <Typography variant="h4" sx={{ color: "white" }}>
+          ブログ
+        </Typography>
       </Box>
     </Box>
 
