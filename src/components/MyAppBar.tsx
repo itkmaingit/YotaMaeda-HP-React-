@@ -15,9 +15,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import * as React from "react";
+import UnderlineLink from "./UnderlineAnimationLink";
 
 import { navItems } from "@/models/navItems";
-import { aTagAsButtonStyle } from "@/styles/utilStyle";
 
 interface Props {
   window?: () => Window;
@@ -79,9 +79,7 @@ export default function MyAppBar(props: Props) {
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              <Link href="/" legacyBehavior passHref>
-                <a css={aTagAsButtonStyle}>Y.Maeda</a>
-              </Link>
+              <UnderlineLink text="Y.Maeda" link="/"></UnderlineLink>
             </Typography>
           </Box>
 
