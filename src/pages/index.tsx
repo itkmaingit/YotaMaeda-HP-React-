@@ -4,13 +4,16 @@ import { css } from "@emotion/react";
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { promises as fs } from "fs";
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticProps } from "next";
 import Image from "next/image";
 import path from "path";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.css";
 import SectionSeparater from "../components/SectionSeparater";
 
+type Props = {
+  fileContents: string[];
+};
 export const getStaticProps: GetStaticProps<{
   fileContents: string[];
 }> = async () => {
@@ -36,7 +39,7 @@ export const getStaticProps: GetStaticProps<{
   };
 };
 
-const IndexPage: NextPage<{ fileContents: string[] }> = ({ fileContents }) => {
+export default function IndexPage({ fileContents }: Props) {
   const profilePictureUrl = "/images/background-image.jpg";
 
   const heroTextStyle = css`
@@ -139,7 +142,13 @@ const IndexPage: NextPage<{ fileContents: string[] }> = ({ fileContents }) => {
 
       <Carousel>
         {fileContents.map((fileContent) => (
-          <Image src={fileContent} alt="image" width="500" height="500" />
+          <Image
+            src={fileContent}
+            alt="image"
+            width="500"
+            height="500"
+            key={fileContent}
+          />
         ))}
       </Carousel>
 
@@ -249,6 +258,4 @@ const IndexPage: NextPage<{ fileContents: string[] }> = ({ fileContents }) => {
     //   </Grid>
     // </Grid>
   );
-};
-
-export default IndexPage;
+}
