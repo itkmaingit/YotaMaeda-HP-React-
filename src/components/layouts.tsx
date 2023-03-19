@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { Toolbar } from "@mui/material";
 import { Box } from "@mui/system";
 import * as React from "react";
+import Footer from "./Footer";
 import MyAppBar from "./MyAppBar";
 
 interface Props {
@@ -15,7 +16,8 @@ interface Props {
 }
 
 const mainContentStyle = css`
-  width: 100vw;
+  width: 100%;
+  padding-bottom: 10em;
 `;
 
 export default function Layout({ window, children }: Props) {
@@ -26,6 +28,7 @@ export default function Layout({ window, children }: Props) {
         <Toolbar />
         {children}
       </Box>
+      <Footer></Footer>
     </React.Fragment>
   );
 }
