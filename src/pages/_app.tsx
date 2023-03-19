@@ -1,4 +1,5 @@
 import Layout from "@/components/layouts";
+import { MediaQueryProvider } from "@/components/provider/MediaQueryProvider";
 import createEmotionCache from "@/createEmotionCache";
 import theme from "@/theme";
 import { CacheProvider, EmotionCache } from "@emotion/react";
@@ -21,9 +22,11 @@ function MyApp(props: MyAppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <MediaQueryProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MediaQueryProvider>
       </ThemeProvider>
     </CacheProvider>
   );
