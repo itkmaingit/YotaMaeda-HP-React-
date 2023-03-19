@@ -32,7 +32,7 @@ export default function PapersPage() {
   const { isPapers, isPreprints, isProceedings } = state;
   const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
   return (
-    <React.Fragment>
+    <>
       <Container css={centerAlignStyle}>
         <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
           <FormLabel component="legend">Display Content</FormLabel>
@@ -77,31 +77,31 @@ export default function PapersPage() {
       </Container>
       <Container>
         {isPapers && (
-          <Container>
-            <Typography>Papers</Typography>
+          <Container sx={{ marginBottom: "3em" }}>
+            <Typography variant="h4">Papers</Typography>
             <PapersList papers={papers}></PapersList>
           </Container>
         )}
         {isPreprints && (
-          <Container>
-            <Typography>Preprints</Typography>
+          <Container sx={{ marginBottom: "3em" }}>
+            <Typography variant="h4">Preprints</Typography>
             <PapersList papers={preprints}></PapersList>
           </Container>
         )}
         {isProceedings && (
-          <Container>
-            <Typography>Proceedings</Typography>
+          <Container sx={{ marginBottom: "3em" }}>
+            <Typography variant="h4">Proceedings</Typography>
             <PapersList papers={proceedings}></PapersList>
           </Container>
         )}
         {!isPapers && !isPreprints && !isProceedings && (
-          <Container css={centerAlignStyle}>
+          <Container css={centerAlignStyle} sx={{ marginTop: "5em" }}>
             <Typography variant="body1" color="red">
               Check some contents to show my mascles.
             </Typography>
           </Container>
         )}
       </Container>
-    </React.Fragment>
+    </>
   );
 }

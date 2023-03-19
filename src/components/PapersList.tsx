@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import "katex/dist/katex.min.css";
-import * as React from "react";
 import Latex from "react-latex";
 
 type Props = {
@@ -27,7 +26,7 @@ export default function PapersList({ papers }: Props) {
         <ListItem alignItems="flex-start" key={paper.paperLink}>
           <ListItemText
             primary={
-              <React.Fragment>
+              <>
                 <Link href={paper.paperLink}>
                   {<Latex>{paper.title}</Latex>}
                 </Link>
@@ -41,7 +40,7 @@ export default function PapersList({ papers }: Props) {
                     (with {paper.coAuthor})
                   </Typography>
                 )}
-              </React.Fragment>
+              </>
             }
             secondary={<Typography>{paper.year}</Typography>}
           />
