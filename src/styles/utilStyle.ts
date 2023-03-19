@@ -8,12 +8,16 @@ export const centerAlignStyle = css`
   flex-direction: column;
 `;
 
-export const aTagAsButtonStyle = css`
-  position: relative;
+export const resetLinkStyle = css`
+  text-decoration: none;
   color: white;
+`;
+
+export const underLineAnimationStyle = css`
+  position: relative;
   display: inline-block;
   transition: 0.3s;
-  text-decoration: none;
+  cursor: pointer;
 
   &::after {
     position: absolute;

@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import MyAppBar from "@/components/MyAppBar";
 import { css } from "@emotion/react";
 import { Toolbar } from "@mui/material";
-import { Box } from "@mui/system";
+import { Container } from "@mui/system";
 import * as React from "react";
 import Footer from "./Footer";
 
@@ -11,22 +12,22 @@ interface Props {
    * You won't need it on your project.
    */
   window?: () => Window;
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 const mainContentStyle = css`
-  width: 100%;
+  /* width: 100%; */
   padding-bottom: 10em;
 `;
 
 export default function Layout({ window, children }: Props) {
   return (
     <>
-      {/* <MyAppBar {...window}></MyAppBar> */}
-      <Box component="main" css={mainContentStyle}>
+      <MyAppBar {...window}></MyAppBar>
+      <Container component="main" css={mainContentStyle}>
         <Toolbar />
         {children}
-      </Box>
+      </Container>
       <Footer></Footer>
     </>
   );

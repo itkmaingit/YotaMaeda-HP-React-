@@ -2,7 +2,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -15,9 +14,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import * as React from "react";
-import UnderlineLink from "./UnderlineAnimationLink";
 
 import { navItems } from "@/models/navItems";
+import {
+  centerAlignStyle,
+  resetLinkStyle,
+  underLineAnimationStyle,
+} from "@/styles/utilStyle";
+import { Container } from "@mui/system";
 
 interface Props {
   window?: () => Window;
@@ -45,7 +49,7 @@ export default function MyAppBar(props: Props) {
           <ListItem key={item.name} disablePadding>
             <ListItemButton
               component={Link}
-              href={item.url}
+              href={item.link}
               sx={{ textAlign: "center" }}
             >
               <ListItemText primary={item.name} />
@@ -60,36 +64,78 @@ export default function MyAppBar(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", padding: 0 }}>
       <CssBaseline />
       <AppBar component="nav">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+        <Toolbar sx={{ height: "64px" }}>
+          <Container
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              padding: 0,
+              height: "100%",
+              margin: 0,
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography
-              variant="h5"
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: "none" } }}
             >
-              <UnderlineLink text="Y.Maeda" link="/"></UnderlineLink>
-            </Typography>
-          </Box>
+              <MenuIcon />
+            </IconButton>
+            <Box css={centerAlignStyle} sx={{ flex: "1 1 200px" }}>
+              <Box
+                sx={{
+                  height: "100%",
+                  padding: "0 16px",
+                  cursor: "pointer",
+                }}
+                css={[centerAlignStyle]}
+              >
+                <Typography
+                  variant="h5"
+                  component="div"
+                  sx={{ display: { xs: "none", sm: "block" } }}
+                >
+                  <Link href="/" legacyBehavior passHref>
+                    <a css={resetLinkStyle}>Y.Maeda</a>
+                  </Link>
+                </Typography>
+              </Box>
+            </Box>
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item.name} href={item.url} sx={{ color: "#fff" }}>
-                {item.name}
-              </Button>
-            ))}
-          </Box>
+            <Box
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                height: "100%",
+                flex: "1 1 200px",
+              }}
+            >
+              {navItems.map((item) => (
+                <Box
+                  sx={{
+                    height: "100%",
+                    padding: "0 16px",
+                  }}
+                  css={[underLineAnimationStyle, centerAlignStyle]}
+                  key={item.name}
+                >
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                  >
+                    <Link href={item.link} legacyBehavior passHref>
+                      <a css={resetLinkStyle}>{item.name}</a>
+                    </Link>
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Container>
         </Toolbar>
       </AppBar>
       <Box component="nav">

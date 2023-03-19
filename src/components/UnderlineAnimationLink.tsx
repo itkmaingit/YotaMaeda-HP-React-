@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { aTagAsButtonStyle } from "@/styles/utilStyle";
+import { underLineAnimationStyle } from "@/styles/utilStyle";
 import Link from "next/link";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 export default function UnderlineLink({ link, text }: Props) {
   return (
     <Link href={link} legacyBehavior passHref>
-      <a css={aTagAsButtonStyle}>{text}</a>
+      <a css={underLineAnimationStyle}>{text}</a>
     </Link>
   );
 }
