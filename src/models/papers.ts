@@ -7,8 +7,7 @@ export type Paper = {
 
 export const preprints: Paper[] = [
   {
-    title:
-      "Revisiting the moduli space of 8 points on  $P^1$  (with Klaus Hulek)",
+    title: "Revisiting the moduli space of 8 points on  $P^1$",
     paperLink: "https://arxiv.org/abs/2211.00052v2",
     year: 2022,
     coAuthor: "Klaus Hulek",

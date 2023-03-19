@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import PapersList from "@/components/PapersList";
 import { useMediaQueryContext } from "@/components/provider/MediaQueryProvider";
-
 import { papers, preprints, proceedings } from "@/models/papers";
+
 import { centerAlignStyle } from "@/styles/utilStyle";
 import {
   Checkbox,
