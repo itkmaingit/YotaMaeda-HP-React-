@@ -28,7 +28,7 @@ export const underLineAnimationStyle = css`
     background: white;
     bottom: -1px;
     transform: scale(0, 1);
-    transform-origin: right top; /*変形（アンダーラインの伸長）の原点がaタグ（各メニュー）の右端*/
+    transform-origin: left top; /*変形（アンダーラインの伸長）の原点がaタグ（各メニュー）の右端*/
     transition: transform 0.3s; /*変形の時間*/
   }
 

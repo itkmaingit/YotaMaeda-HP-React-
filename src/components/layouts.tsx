@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import MyAppBar from "@/components/MyAppBar";
 import { css } from "@emotion/react";
-import { Toolbar } from "@mui/material";
 import { Container } from "@mui/system";
 import * as React from "react";
 import Footer from "./Footer";
@@ -25,7 +24,7 @@ export default function Layout({ window, children }: Props) {
     <>
       <MyAppBar {...window}></MyAppBar>
       <Container component="main" css={mainContentStyle}>
-        <Toolbar />
+        {/* <Toolbar /> */}
         {children}
       </Container>
       <Footer></Footer>

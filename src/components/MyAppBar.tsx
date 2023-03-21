@@ -1,34 +1,26 @@
 /** @jsxImportSource @emotion/react */
-import MenuIcon from "@mui/icons-material/Menu";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import * as React from "react";
 
 import { navItems } from "@/models/navItems";
-import {
-  centerAlignStyle,
-  resetLinkStyle,
-  underLineAnimationStyle,
-} from "@/styles/utilStyle";
-import { Container } from "@mui/system";
+import { centerAlignStyle, resetLinkStyle } from "@/styles/utilStyle";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import NavItem from "./NavItem";
 
 interface Props {
   window?: () => Window;
 }
 
 const drawerWidth = 240;
-// const navItems = ["Home", "About", "Contact"];
 
 export default function MyAppBar(props: Props) {
   const { window } = props;
@@ -63,79 +55,110 @@ export default function MyAppBar(props: Props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+  });
+
+  const AnimationBox = motion(Box);
+
   return (
-    <Box sx={{ display: "flex", padding: 0 }}>
+    <Box
+      sx={{
+        display: "flex",
+        padding: 0,
+        backgroundColor: "primary.main",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+      ref={ref}
+    >
       <CssBaseline />
-      <AppBar component="nav">
-        <Toolbar sx={{ height: "64px" }}>
-          <Container
+      <Box
+        sx={{
+          paddingTop: "30px",
+          paddingBottom: "20px",
+        }}
+        css={centerAlignStyle}
+      >
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{ display: { xs: "none", sm: "block" } }}
+        >
+          <Link href="/" legacyBehavior passHref>
+            <a css={resetLinkStyle}>The Mind of Yota Maeda</a>
+          </Link>
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          padding: 0,
+          height: "64px",
+          margin: "auto",
+          justifyContent: "center",
+          maxWidth: "960px",
+          width: "60vw",
+          zIndex: "999",
+        }}
+      >
+        {navItems.map((item) => (
+          <NavItem key={item.name} {...item}></NavItem>
+        ))}
+      </Box>
+      {!inView && (
+        <AnimationBox
+          sx={{
+            backgroundColor: "primary.main",
+            zIndex: "999",
+            display: "flex",
+            padding: 0,
+            height: "64px",
+            justifyContent: "center",
+            position: "fixed",
+            width: "100%",
+            top: "0",
+          }}
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Box
             sx={{
+              justifyContent: "center",
               display: "flex",
-              flexDirection: "row",
-              padding: 0,
-              height: "100%",
-              margin: 0,
+              maxWidth: "960px",
+              width: "60vw",
             }}
           >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Box css={centerAlignStyle} sx={{ flex: "1 1 200px" }}>
-              <Box
-                sx={{
-                  height: "100%",
-                  padding: "0 16px",
-                  cursor: "pointer",
-                }}
-                css={[centerAlignStyle]}
-              >
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{ display: { xs: "none", sm: "block" } }}
-                >
-                  <Link href="/" legacyBehavior passHref>
-                    <a css={resetLinkStyle}>Y.Maeda</a>
-                  </Link>
-                </Typography>
-              </Box>
-            </Box>
+            <NavItem name="Home" link="/"></NavItem>
+            {navItems.map((item) => (
+              <NavItem key={item.name} {...item}></NavItem>
+            ))}
+          </Box>
+        </AnimationBox>
+      )}
+      {/* <AppBar component="nav">
+        <Toolbar sx={{ height: "64px" }}>
+          <Box
+            sx={{
+              display: { xs: "none", sm: "flex" },
+              height: "100%",
+              flex: "1 1 200px",
+            }}
+          >
+                  <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2, display: { sm: "none" } }}
+        >
+          <MenuIcon />
+        </IconButton>
 
-            <Box
-              sx={{
-                display: { xs: "none", sm: "flex" },
-                height: "100%",
-                flex: "1 1 200px",
-              }}
-            >
-              {navItems.map((item) => (
-                <Box
-                  sx={{
-                    height: "100%",
-                    padding: "0 16px",
-                  }}
-                  css={[underLineAnimationStyle, centerAlignStyle]}
-                  key={item.name}
-                >
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{ display: { xs: "none", sm: "block" } }}
-                  >
-                    <Link href={item.link} legacyBehavior passHref>
-                      <a css={resetLinkStyle}>{item.name}</a>
-                    </Link>
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-          </Container>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box component="nav">
@@ -157,7 +180,7 @@ export default function MyAppBar(props: Props) {
         >
           {drawer}
         </Drawer>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

@@ -44,7 +44,7 @@ export default function IndexPage({ fileContents }: Props) {
 
   const heroTextStyle = css`
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
@@ -55,20 +55,15 @@ export default function IndexPage({ fileContents }: Props) {
     position: relative;
     left: 0px;
     width: 100%;
-    height: 50vh;
+    height: 20vh;
   `;
 
   const backGroundImageStyle = css`
     object-fit: cover;
   `;
 
-  const containImageStyle = css`
-    object-fit: contain;
-  `;
-
   const testImageStyle = css`
     object-fit: cover;
-    /* position: relative !important; */
   `;
 
   return (
