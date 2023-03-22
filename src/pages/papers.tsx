@@ -18,8 +18,8 @@ import * as React from "react";
 export default function PapersPage() {
   const [state, setState] = React.useState({
     isPapers: true,
-    isPreprints: false,
-    isProceedings: false,
+    isPreprints: true,
+    isProceedings: true,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

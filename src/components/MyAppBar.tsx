@@ -67,7 +67,7 @@ export default function MyAppBar(props: Props) {
       sx={{
         display: "flex",
         padding: 0,
-        backgroundColor: "primary.main",
+        backgroundColor: "background.default",
         flexDirection: "column",
         justifyContent: "center",
       }}

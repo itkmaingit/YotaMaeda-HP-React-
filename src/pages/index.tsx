@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { centerAlignStyle } from "@/styles/utilStyle";
 import { css } from "@emotion/react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { promises as fs } from "fs";
 import { GetStaticProps } from "next";
@@ -43,42 +43,80 @@ export default function IndexPage({ fileContents }: Props) {
   const profilePictureUrl = "/images/background-image.jpg";
 
   const heroTextStyle = css`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
     text-align: center;
   `;
 
-  const firstViewStyle = css`
-    position: relative;
-    left: 0px;
-    width: 100%;
-    height: 20vh;
-  `;
-
-  const backGroundImageStyle = css`
-    object-fit: cover;
-  `;
+  const firstViewStyle = css``;
 
   const testImageStyle = css`
     object-fit: cover;
   `;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Box css={firstViewStyle}>
-        <Image
-          src={profilePictureUrl}
-          alt="Hero Image"
-          fill
-          css={backGroundImageStyle}
-        />
-        <Typography variant="h3" css={heroTextStyle}>
-          Yota Maeda's Official site
-        </Typography>
-      </Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Paper
+        sx={{
+          width: "100%",
+          height: "70vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            flex: "1 1 60%",
+          }}
+        >
+          <Typography
+            variant="h2"
+            sx={{
+              fontFamily: "Cormorant Garamond, serif",
+              textAlign: "center",
+              top: "40%",
+              position: "relative",
+            }}
+          >
+            Yota Maeda's Official Site
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              fontFamily: "Cormorant Garamond, serif",
+              textAlign: "center",
+              top: "45%",
+              position: "relative",
+            }}
+          >
+            I am a mathematician and also a researcher at Sony Group
+            Corporation.
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            position: "relative",
+            width: "50%",
+            marginTop: "0",
+            flex: "1 1 40%",
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              position: "relative",
+              fontFamily: "Cormorant Garamond, serif",
+            }}
+          >
+            Short CV
+          </Typography>
+        </Box>
+      </Paper>
       <SectionSeparater text="他ページへのリンク"></SectionSeparater>
 
       <Box>
