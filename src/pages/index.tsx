@@ -30,10 +30,8 @@ export const getStaticProps: GetStaticProps<{
 
   // ファイルの中身を配列に保存
   const fileContents = fileNames.map((fileName) => {
-    const filePath = path.join(folderPath, fileName);
-    const relativePath = path.relative(projectPath, filePath);
-    const publicPath = "/" + relativePath;
-    console.log(publicPath);
+    const filePath = path.join(projectPath, fileName);
+    const publicPath = "/" + filePath;
     return publicPath;
   });
 
@@ -140,7 +138,7 @@ export default function IndexPage({ fileContents }: Props) {
             Short CV
           </Typography>
           {shortCV.map((item) => (
-            <ShortCVText {...item}> ref={ref}</ShortCVText>
+            <ShortCVText {...item} key={item.text}></ShortCVText>
           ))}
         </Box>
         <Box
@@ -159,7 +157,7 @@ export default function IndexPage({ fileContents }: Props) {
             Keywords
           </Typography>
           {KeywordsText.map((item) => (
-            <ShortCVText {...item}> ref={ref}</ShortCVText>
+            <ShortCVText {...item} key={item.text}></ShortCVText>
           ))}
         </Box>
       </Paper>
@@ -207,7 +205,7 @@ export default function IndexPage({ fileContents }: Props) {
           </Carousel>
         )}
         {!isMobileSite && (
-          <Carousel css={imageStyle}>
+          <Carousel css={imageStyle} showThumbs={false}>
             {fileContents.map((fileContent) => (
               <Image
                 src={fileContent}
