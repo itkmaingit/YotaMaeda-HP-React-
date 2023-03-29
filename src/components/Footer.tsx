@@ -37,7 +37,7 @@ export default function Footer() {
                 size="large"
                 style={{ textTransform: "none" }}
               >
-                y.maeda.math@gmail.com
+                y.maeda.math at gmail.com
               </Button>
             }
           />
