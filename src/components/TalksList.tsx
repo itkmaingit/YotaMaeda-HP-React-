@@ -35,18 +35,24 @@ export default function TalksList({ talks }: Props) {
                 </Typography>
                 <Link
                   href={talk.link}
-                  sx={{ color: "text.primary", textDecoration: "underline" }}
+                  sx={{
+                    color: "text.primary",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                 >
                   {<Latex>{talk.title}</Latex>}
                 </Link>
-                <Typography
-                  sx={{ display: "inline", marginLeft: "1em" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  {`(${talk.language})`}
-                </Typography>
+                {talk.language && (
+                  <Typography
+                    sx={{ display: "inline", marginLeft: "1em" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                    {`(${talk.language})`}
+                  </Typography>
+                )}
               </>
             }
             secondary={
@@ -57,7 +63,9 @@ export default function TalksList({ talks }: Props) {
                   variant="body2"
                   color="text.primary"
                 >
-                  {`${talk.eventName} at ${talk.place}, ${talk.date}.`}
+                  {talk.eventName &&
+                    `${talk.eventName} at ${talk.place}, ${talk.date}.`}
+                  {!talk.eventName && `${talk.place}, ${talk.date}.`}
                 </Typography>
               </>
             }

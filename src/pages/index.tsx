@@ -121,7 +121,7 @@ export default function IndexPage({ fileContents }: Props) {
             }}
           >
             <Link
-              href="https://ymaeda-math.github.io/CV.pdf"
+              href="/pdfs/cv.pdf"
               sx={{ color: "text.primary", textDecoration: "underline" }}
             >
               Here is my CV.
@@ -166,6 +166,12 @@ export default function IndexPage({ fileContents }: Props) {
         ></Paper>
       </Box>
       <Box sx={{ height: "1000px" }}>
+        <Typography
+          variant="h4"
+          sx={{ textAlign: "center", marginBottom: "20px" }}
+        >
+          Pictures
+        </Typography>
         <Carousel css={imageStyle}>
           {fileContents.map((fileContent) => (
             <Image
