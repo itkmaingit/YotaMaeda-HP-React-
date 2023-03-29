@@ -1,23 +1,16 @@
 /** @jsxImportSource @emotion/react */
 
+import { NewsText } from "@/models/news";
 import { Typography } from "@mui/material";
 import { useMediaQueryContext } from "./provider/MediaQueryProvider";
 
-export type Props = {
-  text: string;
-  period: string;
-};
-
-export default function ShortCVText({ text, period }: Props) {
+export default function NewsItem({ text }: NewsText) {
   const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
   return (
     <Typography
-      sx={{
-        fontFamily: "Cormorant Garamond, serif",
-        fontSize: isMobileSite ? "0.8rem" : "1.2rem",
-      }}
+      sx={{ color: "primary.main", fontSize: isMobileSite ? "1rem" : "1.5rem" }}
     >
-      {period} : {text}
+      {text}
     </Typography>
   );
 }

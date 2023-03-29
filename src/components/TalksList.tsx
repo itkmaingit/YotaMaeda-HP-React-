@@ -71,7 +71,7 @@ export default function TalksList({ talks }: Props) {
             }
           />
         </ListItem>,
-        <Divider></Divider>,
+        <Divider key={talk.link + "-divider"}></Divider>,
       ])}
     </List>
   );

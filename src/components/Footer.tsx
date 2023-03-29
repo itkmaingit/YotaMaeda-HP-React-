@@ -84,7 +84,7 @@ export default function Footer() {
       <Typography sx={{ color: "primary.main", marginTop: "30px" }}>
         @2023 Yota Maeda
       </Typography>
-      <Typography sx={{ color: "primary.main", marginTop: "30px" }}>
+      <Typography sx={{ color: "primary.main", margin: "30px" }}>
         This website was created by my younger brother, Itsuki Maeda.
       </Typography>
     </Box>

@@ -12,9 +12,11 @@ import * as React from "react";
 
 import { navItems } from "@/models/navItems";
 import { centerAlignStyle, resetLinkStyle } from "@/styles/utilStyle";
+import { Drawer } from "@mui/material";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import NavItem from "./NavItem";
+import { useMediaQueryContext } from "./provider/MediaQueryProvider";
 
 interface Props {
   window?: () => Window;
@@ -29,6 +31,8 @@ export default function MyAppBar(props: Props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -84,10 +88,15 @@ export default function MyAppBar(props: Props) {
         <Typography
           variant="h4"
           component="div"
-          sx={{ display: { xs: "none", sm: "block" } }}
+          // sx={{ display: { xs: "none", sm: "block" } }}
         >
           <Link href="/" legacyBehavior passHref>
-            <a css={resetLinkStyle}>Research Activities of Yota Maeda</a>
+            <a
+              css={resetLinkStyle}
+              style={{ fontSize: isMobileSite ? "1.3rem" : "2rem" }}
+            >
+              Research Activities of Yota Maeda
+            </a>
           </Link>
         </Typography>
       </Box>
@@ -139,6 +148,26 @@ export default function MyAppBar(props: Props) {
           </Box>
         </AnimationBox>
       )}
+      <Box component="nav">
+        <Drawer
+          // container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Box>
     </Box>
   );
 }

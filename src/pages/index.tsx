@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
+import NewsItem from "@/components/NewsItem";
+import { useMediaQueryContext } from "@/components/provider/MediaQueryProvider";
 import ShortCVText from "@/components/ShortCVText";
-import { shortCV } from "@/models/shortCV";
+import { KeywordsText, shortCV } from "@/models/FirstViewItems";
+import { NewsTexts } from "@/models/news";
 import { css } from "@emotion/react";
 import { Link, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { motion } from "framer-motion";
 import { promises as fs } from "fs";
 import { GetStaticProps } from "next";
 import Image from "next/image";
@@ -12,7 +14,6 @@ import path from "path";
 import { useInView } from "react-intersection-observer";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.css";
-import SectionSeparater from "../components/SectionSeparater";
 
 type Props = {
   fileContents: string[];
@@ -43,12 +44,6 @@ export const getStaticProps: GetStaticProps<{
 };
 
 export default function IndexPage({ fileContents }: Props) {
-  const profilePictureUrl = "/images/background-image.jpg";
-
-  const heroTextStyle = css`
-    text-align: center;
-  `;
-
   const imageStyle = css`
     position: relative;
   `;
@@ -62,7 +57,7 @@ export default function IndexPage({ fileContents }: Props) {
     threshold: 0.7,
   });
 
-  const AnimationSeparater = motion(SectionSeparater);
+  const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
 
   return (
     <Box
@@ -74,50 +69,51 @@ export default function IndexPage({ fileContents }: Props) {
       <Paper
         sx={{
           width: "100%",
-          height: "90vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          margin: "50px 0",
+          padding: isMobileSite ? "10px" : "100px",
         }}
         elevation={24}
       >
-        <Box
-          sx={{
-            flex: "1 1 60%",
-          }}
-        >
+        <Box>
           <Typography
-            variant="h2"
             sx={{
               fontFamily: "Cormorant Garamond, serif",
               textAlign: "center",
-              top: "40%",
               position: "relative",
+              fontSize: isMobileSite ? "2rem" : "4rem",
+              marginTop: isMobileSite ? "50px" : "100px",
             }}
           >
-            Yota Maeda's Official Site
+            Yota Maeda's Official Website
           </Typography>
           <Typography
-            variant="h5"
             sx={{
               fontFamily: "Cormorant Garamond, serif",
               textAlign: "center",
-              top: "45%",
               position: "relative",
+              fontSize: isMobileSite ? "1rem" : "1.5rem",
+              marginTop: isMobileSite ? "50px" : "auto",
             }}
           >
             I am a mathematician and also a researcher at Sony Group
             Corporation.
           </Typography>
           <Typography
-            variant="h5"
             sx={{
               fontFamily: "Cormorant Garamond, serif",
               textAlign: "center",
-              top: "45%",
               position: "relative",
-              marginTop: "30px",
+              fontSize: isMobileSite ? "1rem" : "1.5rem",
+            }}
+          >
+            I received my Ph.D. from Kyoto University in 2023.
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Cormorant Garamond, serif",
+              textAlign: "center",
+              position: "relative",
+              margin: isMobileSite ? "30px 0" : "50px 0",
+              fontSize: isMobileSite ? "1.2rem" : "1.5rem",
             }}
           >
             <Link
@@ -132,16 +128,13 @@ export default function IndexPage({ fileContents }: Props) {
         <Box
           sx={{
             position: "relative",
-            width: "70%",
-            marginTop: "0",
-            flex: "1 1 40%",
           }}
         >
           <Typography
-            variant="h6"
             sx={{
               position: "relative",
               fontFamily: "Cormorant Garamond, serif",
+              fontSize: isMobileSite ? "1rem" : "1.5rem",
             }}
           >
             Short CV
@@ -150,8 +143,27 @@ export default function IndexPage({ fileContents }: Props) {
             <ShortCVText {...item}> ref={ref}</ShortCVText>
           ))}
         </Box>
+        <Box
+          sx={{
+            position: "relative",
+            margin: isMobileSite ? "100px 0" : "50px 0",
+          }}
+        >
+          <Typography
+            sx={{
+              position: "relative",
+              fontFamily: "Cormorant Garamond, serif",
+              fontSize: isMobileSite ? "1rem" : "1.5rem",
+            }}
+          >
+            Keywords
+          </Typography>
+          {KeywordsText.map((item) => (
+            <ShortCVText {...item}> ref={ref}</ShortCVText>
+          ))}
+        </Box>
       </Paper>
-      <Box ref={ref} sx={{ height: "30vh" }}>
+      <Box ref={ref} sx={{ height: "30vh", marginTop: "40px" }}>
         <Typography variant="h4" sx={{ textAlign: "center" }}>
           Recent News
         </Typography>
@@ -162,28 +174,52 @@ export default function IndexPage({ fileContents }: Props) {
             width: "100%",
             height: "20vh",
             backgroundColor: "#dddddd",
+            overflow: "scroll",
+            padding: isMobileSite ? "40px 30px" : "40px 100px",
           }}
-        ></Paper>
+        >
+          {NewsTexts.map((item) => (
+            <NewsItem {...item}></NewsItem>
+          ))}
+        </Paper>
       </Box>
-      <Box sx={{ height: "1000px" }}>
+      <Box
+        sx={{ height: isMobileSite ? "600px" : "1000px", marginTop: "40px" }}
+      >
         <Typography
           variant="h4"
           sx={{ textAlign: "center", marginBottom: "20px" }}
         >
           Pictures
         </Typography>
-        <Carousel css={imageStyle}>
-          {fileContents.map((fileContent) => (
-            <Image
-              src={fileContent}
-              alt="image"
-              key={fileContent}
-              css={testImageStyle}
-              width="500"
-              height="700"
-            />
-          ))}
-        </Carousel>
+        {isMobileSite && (
+          <Carousel css={imageStyle}>
+            {fileContents.map((fileContent) => (
+              <Image
+                src={fileContent}
+                alt="image"
+                key={fileContent}
+                css={testImageStyle}
+                width="300"
+                height="500"
+              />
+            ))}
+          </Carousel>
+        )}
+        {!isMobileSite && (
+          <Carousel css={imageStyle}>
+            {fileContents.map((fileContent) => (
+              <Image
+                src={fileContent}
+                alt="image"
+                key={fileContent}
+                css={testImageStyle}
+                width="500"
+                height="700"
+              />
+            ))}
+          </Carousel>
+        )}
       </Box>
     </Box>
   );

@@ -7,6 +7,7 @@ import {
 } from "@/styles/utilStyle";
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
+import { useMediaQueryContext } from "./provider/MediaQueryProvider";
 
 type Props = {
   name: string;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export default function NavItem({ name, link }: Props) {
+  const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
   return (
     <Box
       sx={{
@@ -23,9 +25,8 @@ export default function NavItem({ name, link }: Props) {
       css={[underLineAnimationStyle, centerAlignStyle]}
     >
       <Typography
-        variant="h6"
         component="div"
-        sx={{ display: { xs: "none", sm: "block" } }}
+        sx={{ fontSize: isMobileSite ? "1rem" : "1.6rem" }}
       >
         <Link href={link} legacyBehavior passHref>
           <a css={resetLinkStyle}>{name}</a>
