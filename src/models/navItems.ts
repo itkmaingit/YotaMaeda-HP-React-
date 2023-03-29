@@ -4,8 +4,7 @@ export type navItemsType = {
 };
 
 export const navItems: navItemsType[] = [
-  { name: "Talks", link: "/talks" },
   { name: "Papers", link: "/papers" },
-  { name: "My Friends", link: "/my-friends" },
-  { name: "Birthday", link: "/birthday" },
+  { name: "Talks", link: "/talks" },
+  { name: "Links", link: "/links" },
 ];

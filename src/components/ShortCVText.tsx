@@ -15,7 +15,7 @@ export default function ShortCVText({ text, period }: Props) {
         fontFamily: "Cormorant Garamond, serif",
       }}
     >
-      `${period} : ${text}`
+      {period} : {text}
     </Typography>
   );
 }

@@ -27,7 +27,22 @@ export default function PapersList({ papers }: Props) {
           <ListItemText
             primary={
               <>
-                <Link href={paper.paperLink}>
+                <Typography
+                  sx={{ display: "inline", fontSize: "1rem" }}
+                  component="span"
+                  color="text.primary"
+                  marginRight="0.5rem"
+                >
+                  {paper.number}.
+                </Typography>
+                <Link
+                  href={paper.paperLink}
+                  sx={{
+                    display: "inline",
+                    color: "text.primary",
+                    textDecoration: "underline",
+                  }}
+                >
                   {<Latex>{paper.title}</Latex>}
                 </Link>
                 {paper.coAuthor && (
@@ -36,13 +51,33 @@ export default function PapersList({ papers }: Props) {
                     component="span"
                     variant="body2"
                     color="text.primary"
+                    marginLeft="0.5rem"
                   >
-                    (with {paper.coAuthor})
+                    (with {paper.coAuthor}),
                   </Typography>
                 )}
               </>
             }
-            secondary={<Typography>{paper.year}</Typography>}
+            secondary={
+              <>
+                <Typography
+                  component="span"
+                  sx={{ display: "inline", color: "text.primary" }}
+                >
+                  {paper.year}
+                </Typography>
+                {paper.journal && (
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                    {paper.journal}
+                  </Typography>
+                )}
+              </>
+            }
           />
         </ListItem>,
         <Divider key={paper.paperLink + "-divider"}></Divider>,

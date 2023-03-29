@@ -24,14 +24,28 @@ export default function TalksList({ talks }: Props) {
           <ListItemText
             primary={
               <>
-                <Link href={talk.link}>{<Latex>{talk.title}</Latex>}</Link>
+                <Typography
+                  sx={{
+                    display: "inline",
+                    fontSize: "1rem",
+                    marginRight: "0.5rem",
+                  }}
+                >
+                  {i + 1}.{" "}
+                </Typography>
+                <Link
+                  href={talk.link}
+                  sx={{ color: "text.primary", textDecoration: "underline" }}
+                >
+                  {<Latex>{talk.title}</Latex>}
+                </Link>
                 <Typography
                   sx={{ display: "inline", marginLeft: "1em" }}
                   component="span"
                   variant="body2"
                   color="text.primary"
                 >
-                  {`(${talk.language}) - ${talk.eventName} at ${talk.place}`}
+                  {`(${talk.language})`}
                 </Typography>
               </>
             }
@@ -43,7 +57,7 @@ export default function TalksList({ talks }: Props) {
                   variant="body2"
                   color="text.primary"
                 >
-                  {`${talk.date}`}
+                  {`${talk.eventName} at ${talk.place}, ${talk.date}.`}
                 </Typography>
               </>
             }

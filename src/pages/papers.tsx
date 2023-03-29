@@ -35,7 +35,11 @@ export default function PapersPage() {
     <>
       <Container css={centerAlignStyle}>
         <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-          <FormLabel component="legend">Display Content</FormLabel>
+          <FormLabel component="legend">
+            <Typography variant="h6" sx={{ color: "text.primary" }}>
+              Display Content
+            </Typography>
+          </FormLabel>
           <FormGroup
             sx={{
               display: "flex",
@@ -48,6 +52,12 @@ export default function PapersPage() {
                   checked={isPapers}
                   onChange={handleChange}
                   name="isPapers"
+                  sx={{
+                    color: "text.primary",
+                    "&.Mui-checked": {
+                      color: "text.primary",
+                    },
+                  }}
                 />
               }
               label="Papers"
@@ -58,6 +68,12 @@ export default function PapersPage() {
                   checked={isPreprints}
                   onChange={handleChange}
                   name="isPreprints"
+                  sx={{
+                    color: "text.primary",
+                    "&.Mui-checked": {
+                      color: "text.primary",
+                    },
+                  }}
                 />
               }
               label="Preprints"
@@ -68,6 +84,12 @@ export default function PapersPage() {
                   checked={isProceedings}
                   onChange={handleChange}
                   name="isProceedings"
+                  sx={{
+                    color: "text.primary",
+                    "&.Mui-checked": {
+                      color: "text.primary",
+                    },
+                  }}
                 />
               }
               label="Proceedings (no peer view)"

@@ -33,7 +33,7 @@ export default function MyAppBar(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Research Activities of Yota Maeda
       </Typography>
       <Divider />
       <List>
@@ -87,7 +87,7 @@ export default function MyAppBar(props: Props) {
           sx={{ display: { xs: "none", sm: "block" } }}
         >
           <Link href="/" legacyBehavior passHref>
-            <a css={resetLinkStyle}>The Mind of Yota Maeda</a>
+            <a css={resetLinkStyle}>Research Activities of Yota Maeda</a>
           </Link>
         </Typography>
       </Box>
@@ -139,48 +139,6 @@ export default function MyAppBar(props: Props) {
           </Box>
         </AnimationBox>
       )}
-      {/* <AppBar component="nav">
-        <Toolbar sx={{ height: "64px" }}>
-          <Box
-            sx={{
-              display: { xs: "none", sm: "flex" },
-              height: "100%",
-              flex: "1 1 200px",
-            }}
-          >
-                  <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: "none" } }}
-        >
-          <MenuIcon />
-        </IconButton>
-
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Box component="nav">
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Box> */}
     </Box>
   );
 }
