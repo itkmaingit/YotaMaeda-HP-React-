@@ -119,7 +119,7 @@ export default function PapersPage() {
         {!isPapers && !isPreprints && !isProceedings && (
           <Container css={centerAlignStyle} sx={{ marginTop: "5em" }}>
             <Typography variant="body1" color="red">
-              Check some contents to show my mascles.
+              Check some contents.
             </Typography>
           </Container>
         )}
