@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import NewsItem from "@/components/NewsItem";
+import NewsList from "@/components/NewsList";
 import { useMediaQueryContext } from "@/components/provider/MediaQueryProvider";
 import ShortCVText from "@/components/ShortCVText";
 import { KeywordsText, shortCV } from "@/models/FirstViewItems";
-import { NewsTexts } from "@/models/news";
 import { css } from "@emotion/react";
 import { Link, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -46,7 +45,7 @@ export default function IndexPage({ fileContents }: Props) {
     position: relative;
   `;
 
-  const testImageStyle = css`
+  const coverImageStyle = css`
     object-fit: cover;
   `;
 
@@ -56,6 +55,16 @@ export default function IndexPage({ fileContents }: Props) {
   });
 
   const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
+
+  const profileImagePath = "/images/yota.jpg";
+  const profileImageStyle = css`
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: 50% 100%;
+    margin: auto;
+    display: block;
+    margin-top: ${isMobileSite && "50px"};
+  `;
 
   return (
     <Box
@@ -72,13 +81,20 @@ export default function IndexPage({ fileContents }: Props) {
         elevation={24}
       >
         <Box>
+          <Image
+            src={profileImagePath}
+            alt="image"
+            css={profileImageStyle}
+            width={isMobileSite ? "200" : "300"}
+            height={isMobileSite ? "200" : "300"}
+          />
           <Typography
             sx={{
               fontFamily: "Cormorant Garamond, serif",
               textAlign: "center",
               position: "relative",
               fontSize: isMobileSite ? "2rem" : "4rem",
-              marginTop: isMobileSite ? "50px" : "100px",
+              marginTop: isMobileSite ? "30px" : "60px",
             }}
           >
             Yota Maeda's Official Website
@@ -165,21 +181,7 @@ export default function IndexPage({ fileContents }: Props) {
         <Typography variant="h4" sx={{ textAlign: "center" }}>
           Recent News
         </Typography>
-
-        <Paper
-          sx={{
-            marginTop: "20px",
-            width: "100%",
-            height: "20vh",
-            backgroundColor: "#dddddd",
-            overflow: "scroll",
-            padding: isMobileSite ? "40px 30px" : "40px 100px",
-          }}
-        >
-          {NewsTexts.map((item) => (
-            <NewsItem {...item}></NewsItem>
-          ))}
-        </Paper>
+        <NewsList></NewsList>
       </Box>
       <Box
         sx={{ height: isMobileSite ? "600px" : "1000px", marginTop: "40px" }}
@@ -191,13 +193,13 @@ export default function IndexPage({ fileContents }: Props) {
           Pictures
         </Typography>
         {isMobileSite && (
-          <Carousel css={imageStyle}>
+          <Carousel css={imageStyle} showThumbs={false}>
             {fileContents.map((fileContent) => (
               <Image
                 src={fileContent}
                 alt="image"
                 key={fileContent}
-                css={testImageStyle}
+                css={coverImageStyle}
                 width="300"
                 height="500"
               />
@@ -211,7 +213,7 @@ export default function IndexPage({ fileContents }: Props) {
                 src={fileContent}
                 alt="image"
                 key={fileContent}
-                css={testImageStyle}
+                css={coverImageStyle}
                 width="500"
                 height="700"
               />
