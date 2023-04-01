@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import NewsItem from "@/components/NewsItem";
+import NewsList from "@/components/NewsList";
 import { useMediaQueryContext } from "@/components/provider/MediaQueryProvider";
 import ShortCVText from "@/components/ShortCVText";
 import { KeywordsText, shortCV } from "@/models/FirstViewItems";
-import { NewsTexts } from "@/models/news";
 import { css } from "@emotion/react";
 import { Link, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -182,21 +181,7 @@ export default function IndexPage({ fileContents }: Props) {
         <Typography variant="h4" sx={{ textAlign: "center" }}>
           Recent News
         </Typography>
-
-        <Paper
-          sx={{
-            marginTop: "20px",
-            width: "100%",
-            height: "20vh",
-            backgroundColor: "#dddddd",
-            overflow: "scroll",
-            padding: isMobileSite ? "40px 30px" : "40px 100px",
-          }}
-        >
-          {NewsTexts.map((item) => (
-            <NewsItem {...item}></NewsItem>
-          ))}
-        </Paper>
+        <NewsList></NewsList>
       </Box>
       <Box
         sx={{ height: isMobileSite ? "600px" : "1000px", marginTop: "40px" }}
@@ -208,7 +193,7 @@ export default function IndexPage({ fileContents }: Props) {
           Pictures
         </Typography>
         {isMobileSite && (
-          <Carousel css={imageStyle}>
+          <Carousel css={imageStyle} showThumbs={false}>
             {fileContents.map((fileContent) => (
               <Image
                 src={fileContent}
