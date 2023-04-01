@@ -46,7 +46,7 @@ export default function IndexPage({ fileContents }: Props) {
     position: relative;
   `;
 
-  const testImageStyle = css`
+  const coverImageStyle = css`
     object-fit: cover;
   `;
 
@@ -56,6 +56,16 @@ export default function IndexPage({ fileContents }: Props) {
   });
 
   const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
+
+  const profileImagePath = "/images/yota.jpg";
+  const profileImageStyle = css`
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: 50% 100%;
+    margin: auto;
+    display: block;
+    margin-top: ${isMobileSite && "50px"};
+  `;
 
   return (
     <Box
@@ -72,13 +82,20 @@ export default function IndexPage({ fileContents }: Props) {
         elevation={24}
       >
         <Box>
+          <Image
+            src={profileImagePath}
+            alt="image"
+            css={profileImageStyle}
+            width={isMobileSite ? "200" : "300"}
+            height={isMobileSite ? "200" : "300"}
+          />
           <Typography
             sx={{
               fontFamily: "Cormorant Garamond, serif",
               textAlign: "center",
               position: "relative",
               fontSize: isMobileSite ? "2rem" : "4rem",
-              marginTop: isMobileSite ? "50px" : "100px",
+              marginTop: isMobileSite ? "30px" : "60px",
             }}
           >
             Yota Maeda's Official Website
@@ -197,7 +214,7 @@ export default function IndexPage({ fileContents }: Props) {
                 src={fileContent}
                 alt="image"
                 key={fileContent}
-                css={testImageStyle}
+                css={coverImageStyle}
                 width="300"
                 height="500"
               />
@@ -211,7 +228,7 @@ export default function IndexPage({ fileContents }: Props) {
                 src={fileContent}
                 alt="image"
                 key={fileContent}
-                css={testImageStyle}
+                css={coverImageStyle}
                 width="500"
                 height="700"
               />
