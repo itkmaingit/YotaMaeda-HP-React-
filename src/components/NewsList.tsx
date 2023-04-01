@@ -65,10 +65,10 @@ function ChildComponent({ parentRef }: ChildComponentProps) {
 
   useEffect(() => {
     const parentElement = parentRef.current;
-    const width = parentElement.offsetWidth;
-    const height = parentElement.offsetHeight;
-    setParentWidth(width);
-    setParentHeight(height);
+    const width = parentElement?.offsetWidth;
+    const height = parentElement?.offsetHeight;
+    setParentWidth(width ?? 0);
+    setParentHeight(height ?? 0);
   }, [parentRef]);
 
   return (
