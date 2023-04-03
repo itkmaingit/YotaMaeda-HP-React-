@@ -31,6 +31,8 @@ export default function links() {
                 cursor: "pointer",
               }}
               href={item.link}
+              target="_blank"
+              rel="noopener"
             >
               {item.name}
             </Link>
@@ -59,7 +61,8 @@ export default function links() {
                 fontSize: "1.5rem",
                 cursor: "pointer",
               }}
-              href={item.link}
+              target="_blank"
+              rel="noopener"
             >
               {item.name}
             </Link>

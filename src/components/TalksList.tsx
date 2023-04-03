@@ -40,6 +40,8 @@ export default function TalksList({ talks }: Props) {
                     textDecoration: "underline",
                     cursor: "pointer",
                   }}
+                  target="_blank"
+                  rel="noopener"
                 >
                   {<Latex>{talk.title}</Latex>}
                 </Link>
@@ -64,8 +66,11 @@ export default function TalksList({ talks }: Props) {
                   color="text.primary"
                 >
                   {talk.eventName &&
-                    `${talk.eventName} at ${talk.place}, ${talk.date}.`}
-                  {!talk.eventName && `${talk.place}, ${talk.date}.`}
+                    `${talk.eventName} at ${talk.place}, ${new Date(
+                      talk.date
+                    ).toDateString()}.`}
+                  {!talk.eventName &&
+                    `${talk.place}, ${new Date(talk.date).toDateString()}.`}
                 </Typography>
               </>
             }
