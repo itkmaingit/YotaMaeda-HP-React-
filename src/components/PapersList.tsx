@@ -42,6 +42,8 @@ export default function PapersList({ papers }: Props) {
                     color: "text.primary",
                     textDecoration: "underline",
                   }}
+                  target="_blank"
+                  rel="noopener"
                 >
                   {<Latex>{paper.title}</Latex>}
                 </Link>
