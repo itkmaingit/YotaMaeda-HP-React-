@@ -2,7 +2,6 @@
 
 import { Paper } from "@/models/papers";
 import {
-  css,
   Divider,
   Link,
   List,
@@ -15,15 +14,14 @@ import Latex from "react-latex";
 
 type Props = {
   papers: Paper[];
+  startNumber: number;
 };
 
-const inlineStyle = css``;
-
-export default function PapersList({ papers }: Props) {
+export default function PapersList({ papers, startNumber }: Props) {
   return (
     <List>
       {papers.flatMap((paper, i) => [
-        <ListItem alignItems="flex-start" key={paper.paperLink}>
+        <ListItem alignItems="flex-start" key={paper.link}>
           <ListItemText
             primary={
               <>
@@ -33,10 +31,10 @@ export default function PapersList({ papers }: Props) {
                   color="text.primary"
                   marginRight="0.5rem"
                 >
-                  {paper.number}.
+                  {i + startNumber}.
                 </Typography>
                 <Link
-                  href={paper.paperLink}
+                  href={paper.link}
                   sx={{
                     display: "inline",
                     color: "text.primary",
@@ -82,7 +80,7 @@ export default function PapersList({ papers }: Props) {
             }
           />
         </ListItem>,
-        <Divider key={paper.paperLink + "-divider"}></Divider>,
+        <Divider key={paper.link + "-divider"}></Divider>,
       ])}
     </List>
   );
