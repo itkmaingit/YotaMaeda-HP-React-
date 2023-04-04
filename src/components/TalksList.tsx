@@ -17,10 +17,16 @@ type Props = {
 };
 
 export default function TalksList({ talks }: Props) {
+  talks.flatMap((talk, i) => {
+    console.log(talk.date);
+  });
   return (
     <List>
       {talks.flatMap((talk, i) => [
-        <ListItem alignItems="flex-start" key={talk.link}>
+        <ListItem
+          alignItems="flex-start"
+          key={talk.title + talk.link + talk.eventName}
+        >
           <ListItemText
             primary={
               <>
@@ -64,6 +70,7 @@ export default function TalksList({ talks }: Props) {
                   component="span"
                   variant="body2"
                   color="text.primary"
+                  suppressHydrationWarning={true}
                 >
                   {talk.eventName &&
                     `${talk.eventName} at ${talk.place}, ${new Date(
@@ -76,7 +83,9 @@ export default function TalksList({ talks }: Props) {
             }
           />
         </ListItem>,
-        <Divider key={talk.link + "-divider"}></Divider>,
+        <Divider
+          key={talk.title + talk.link + talk.eventName + "-divider"}
+        ></Divider>,
       ])}
     </List>
   );

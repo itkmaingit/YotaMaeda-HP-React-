@@ -22,12 +22,11 @@ export const getStaticProps = async () => {
     queries: { limit: 100 },
   });
 
-  console.log(typeof data.contents[0].date);
-
   return {
     props: {
       talks: data.contents,
     },
+    revalidate: 120,
   };
 };
 
