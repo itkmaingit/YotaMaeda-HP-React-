@@ -17,9 +17,6 @@ type Props = {
 };
 
 export default function TalksList({ talks }: Props) {
-  talks.flatMap((talk, i) => {
-    console.log(talk.date);
-  });
   return (
     <List>
       {talks.flatMap((talk, i) => [
