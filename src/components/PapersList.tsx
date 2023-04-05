@@ -62,7 +62,11 @@ export default function PapersList({ papers, startNumber }: Props) {
               <>
                 <Typography
                   component="span"
-                  sx={{ display: "inline", color: "text.primary" }}
+                  sx={{
+                    display: "inline",
+                    color: "text.primary",
+                    marginRight: "0.5em",
+                  }}
                 >
                   {paper.year}
                 </Typography>
