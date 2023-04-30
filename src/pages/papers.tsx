@@ -173,8 +173,8 @@ export const getStaticProps = async () => {
   return {
     props: {
       papers: papers,
-      preprints: proceedings,
-      proceedings: preprints,
+      preprints: preprints,
+      proceedings: proceedings,
     },
     revalidate: 120,
   };
