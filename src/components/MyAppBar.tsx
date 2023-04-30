@@ -95,7 +95,7 @@ export default function MyAppBar(props: Props) {
               css={resetLinkStyle}
               style={{ fontSize: isMobileSite ? "1.3rem" : "2rem" }}
             >
-              Research Activities of Yota Maeda
+              Yota Maeda's Official Website
             </a>
           </Link>
         </Typography>
