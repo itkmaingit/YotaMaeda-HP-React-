@@ -97,7 +97,7 @@ export default function IndexPage({ fileContents }: Props) {
               marginTop: isMobileSite ? "30px" : "60px",
             }}
           >
-            Yota Maeda's Official Website
+            Research Activities of Yota Maeda
           </Typography>
           <Typography
             sx={{
