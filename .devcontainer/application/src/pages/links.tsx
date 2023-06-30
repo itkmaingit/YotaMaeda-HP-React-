@@ -63,6 +63,7 @@ export default function links() {
               }}
               target="_blank"
               rel="noopener"
+              href={item.link}
             >
               {item.name}
             </Link>
