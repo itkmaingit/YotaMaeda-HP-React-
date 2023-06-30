@@ -154,7 +154,7 @@ export default function IndexPage({ fileContents }: Props) {
             Short CV
           </Typography>
           {shortCV.map((item) => (
-            <ShortCVText {...item} key={item.text}></ShortCVText>
+            <ShortCVText {...item} key={item.period}></ShortCVText>
           ))}
         </Box>
         <Box
@@ -173,7 +173,7 @@ export default function IndexPage({ fileContents }: Props) {
             Keywords
           </Typography>
           {KeywordsText.map((item) => (
-            <ShortCVText {...item} key={item.text}></ShortCVText>
+            <ShortCVText {...item} key={item.period}></ShortCVText>
           ))}
         </Box>
       </Paper>

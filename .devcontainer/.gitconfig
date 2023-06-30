@@ -1,0 +1,13 @@
+[core]
+	editor = \"C:\\Users\\itk_m\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+	autocrlf = false
+[user]
+	name = itkmaingit
+	email = itkmain.git@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[credential]
+	helper = "!f() { /home/node/.vscode-server/bin/695af097c7bd098fbf017ce3ac85e09bbc5dda06/node /tmp/vscode-remote-containers-e5cd5726-16d9-4b15-8b50-f8172dacc178.js git-credential-helper $*; }; f"

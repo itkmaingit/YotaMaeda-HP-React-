@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - "4444:3000"
+    volumes:
+      - ./:/home/node
+      - exception-volumes:/home/node/application/node_modules
+
+    working_dir: "/home/node/application"
+    tty: true
+
+volumes:
+  exception-volumes:
