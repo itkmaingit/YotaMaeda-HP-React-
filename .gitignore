@@ -2,4 +2,7 @@
 .devcontainer/.npm/*
 .devcontainer/.vscode-server/*
 .devcontainer/.dotnet/*
+.devcontainer/.cache/*
+.devcontainer/.gnupg/*
+.devcontainer/.ssh/*
 .node_repl_history
