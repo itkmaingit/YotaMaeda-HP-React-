@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { Paper } from "@/models/papers";
+import { Misc } from "@/models/papers";
 import {
   Divider,
   Link,
@@ -13,11 +13,11 @@ import "katex/dist/katex.min.css";
 import Latex from "react-latex";
 
 type Props = {
-  papers: Paper[];
+  papers: Misc[];
   startNumber: number;
 };
 
-export default function PapersList({ papers, startNumber }: Props) {
+export default function MiscList({ papers, startNumber }: Props) {
   return (
     <List>
       {papers.flatMap((paper, i) => [

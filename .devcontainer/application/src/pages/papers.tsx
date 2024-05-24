@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import PapersList from "@/components/PapersList";
+import MiscList from "@/components/MiscList";
+import PaperList from "@/components/PaperList";
 import { useMediaQueryContext } from "@/components/provider/MediaQueryProvider";
 import { client } from "@/libs/client";
-import { Paper } from "@/models/papers";
+import { Misc, Paper, UncategorizedPaper } from "@/models/papers";
 import { centerAlignStyle } from "@/styles/utilStyle";
 import {
   Checkbox,
@@ -17,17 +18,19 @@ import { InferGetStaticPropsType, NextPage } from "next";
 import * as React from "react";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
+type CategorizedPapers = {
+  startNumber: number;
+  papers: Paper[];
+};
 
-const PapersPage: NextPage<Props> = ({ papers, preprints, proceedings }) => {
+const PapersPage: NextPage<Props> = ({ papers, papersLength, proceedings }) => {
   const [state, setState] = React.useState({
     isPapers: true,
-    isPreprints: true,
     isProceedings: true,
   });
 
   const [startNumber, setStartNumber] = React.useState({
-    preprints: papers.length + 1,
-    proceedings: papers.length + preprints.length + 1,
+    proceedings: papersLength + 1,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,18 +42,11 @@ const PapersPage: NextPage<Props> = ({ papers, preprints, proceedings }) => {
 
   React.useEffect(() => {
     setStartNumber({
-      preprints: state.isPapers ? papers.length + 1 : 1,
-      proceedings: state.isPapers
-        ? state.isPreprints
-          ? papers.length + preprints.length + 1
-          : papers.length + 1
-        : state.isPreprints
-        ? preprints.length + 1
-        : 1,
+      proceedings: state.isPapers ? papersLength + 1 : 1,
     });
   }, [state]);
 
-  const { isPapers, isPreprints, isProceedings } = state;
+  const { isPapers, isProceedings } = state;
   const { isMobileSite } = useMediaQueryContext();
   return (
     <>
@@ -86,22 +82,6 @@ const PapersPage: NextPage<Props> = ({ papers, preprints, proceedings }) => {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={isPreprints}
-                  onChange={handleChange}
-                  name="isPreprints"
-                  sx={{
-                    color: "text.primary",
-                    "&.Mui-checked": {
-                      color: "text.primary",
-                    },
-                  }}
-                />
-              }
-              label="Preprints"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
                   checked={isProceedings}
                   onChange={handleChange}
                   name="isProceedings"
@@ -121,29 +101,29 @@ const PapersPage: NextPage<Props> = ({ papers, preprints, proceedings }) => {
       <Container>
         {isPapers && (
           <Container sx={{ marginBottom: "3em" }}>
-            <Typography variant="h4">Papers</Typography>
-            <PapersList papers={papers} startNumber={1}></PapersList>
-          </Container>
-        )}
-        {isPreprints && (
-          <Container sx={{ marginBottom: "3em" }}>
-            <Typography variant="h4">Preprints</Typography>
-            <PapersList
-              papers={preprints}
-              startNumber={startNumber.preprints}
-            ></PapersList>
+            <Typography variant="h4" sx={{ marginBottom: "1em" }}>
+              Papers
+            </Typography>
+            {Object.keys(papers).map((category) => (
+              <PaperList
+                key={category}
+                category={category}
+                papers={papers[category].papers}
+                startNumber={papers[category].startNumber}
+              />
+            ))}
           </Container>
         )}
         {isProceedings && (
           <Container sx={{ marginBottom: "3em" }}>
             <Typography variant="h4">Proceedings</Typography>
-            <PapersList
+            <MiscList
               papers={proceedings}
               startNumber={startNumber.proceedings}
-            ></PapersList>
+            ></MiscList>
           </Container>
         )}
-        {!isPapers && !isPreprints && !isProceedings && (
+        {!isPapers && !isProceedings && (
           <Container css={centerAlignStyle} sx={{ marginTop: "5em" }}>
             <Typography variant="body1" color="red">
               Check some contents.
@@ -156,24 +136,39 @@ const PapersPage: NextPage<Props> = ({ papers, preprints, proceedings }) => {
 };
 
 export const getStaticProps = async () => {
-  const data = await client.get({
+  const miscData = await client.get({
     endpoint: "papers",
     queries: { limit: 500 },
   });
-  const papers: Paper[] = data.contents.filter((val: Paper) => {
-    return val.papersType[0] === "papers";
+  const paperData = await client.get({
+    endpoint: "only_papers",
+    queries: { limit: 500 },
   });
-  const preprints: Paper[] = data.contents.filter((val: Paper) => {
-    return val.papersType[0] === "preprints";
+  const papersLength = paperData.contents.length;
+  const papers: { [key: string]: CategorizedPapers } = {};
+
+  paperData.contents.forEach((elem: UncategorizedPaper) => {
+    const { category, ...paperDetails } = elem;
+    if (!papers[category]) {
+      papers[category] = { startNumber: 1, papers: [] };
+    }
+    papers[category].papers.push(paperDetails);
   });
-  const proceedings: Paper[] = data.contents.filter((val: Paper) => {
+
+  let startNumber = 1;
+  Object.keys(papers).map((category) => {
+    papers[category].startNumber = startNumber;
+    startNumber += papers[category].papers.length;
+  });
+
+  const proceedings: Misc[] = miscData.contents.filter((val: Misc) => {
     return val.papersType[0] === "proceedings";
   });
 
   return {
     props: {
       papers: papers,
-      preprints: preprints,
+      papersLength: papersLength,
       proceedings: proceedings,
     },
     revalidate: 120,

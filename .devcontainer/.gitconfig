@@ -1,5 +1,4 @@
 [core]
-	editor = \"C:\\Users\\itk_m\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
 	autocrlf = false
 [user]
 	name = itkmaingit
@@ -9,5 +8,42 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[url "github:"]
+    InsteadOf = https://github.com/
+    InsteadOf = git@github.com:
+[merge]
+	ff = false
+[alias]
+	[alias]
+	vcm = "!f () { git branch --merged|egrep -v '\\*|developed|master'|xargs -r git branch -d; git fetch --prune; };f"
+
+	ss = status
+	br = branch
+	brm = branch -m
+	brd = branch -d
+	brdd = branch -D
+	sw = switch
+	swc = switch -c
+	adu = add -u
+	adup = add -u -p
+	ada = add -A
+	cm = commit -m
+	cam = commit -am
+	mg = merge --no-ff
+	mgff = merge --ff
+	cp = cherry-pick
+	firstpush = push --set-upstream
+	log1 = log -1
+	log2 = log -2
+	log3 = log -3
+	logo = log --oneline
+	logn = log --name-status --oneline
+	firstcom = commit --allow-empty -m \"Initial commit\"
+	pl = pull
+	ph = push
+	st = stash
+	stp = stash pop
+	stl = stash list
+	stps = stash pop "stash@{0}"
 [credential]
-	helper = "!f() { /home/node/.vscode-server/bin/695af097c7bd098fbf017ce3ac85e09bbc5dda06/node /tmp/vscode-remote-containers-e5cd5726-16d9-4b15-8b50-f8172dacc178.js git-credential-helper $*; }; f"
+	helper = "!f() { /home/node/.vscode-server/bin/dc96b837cf6bb4af9cd736aa3af08cf8279f7685/node /tmp/vscode-remote-containers-58be1a6a-bb7c-4e99-b5d1-3716247307ea.js git-credential-helper $*; }; f"

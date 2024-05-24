@@ -56,7 +56,7 @@ export default function IndexPage({ fileContents }: Props) {
 
   const { isMobileSite, isTabletSite, isPcSite } = useMediaQueryContext();
 
-  const profileImagePath = "/images/yota.jpg";
+  const profileImagePath = "/images/hero.jpg";
   const profileImageStyle = css`
     object-fit: cover;
     border-radius: 50%;
