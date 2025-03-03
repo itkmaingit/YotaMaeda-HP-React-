@@ -118,7 +118,7 @@ export default function IndexPage({ fileContents }: Props) {
               fontSize: isMobileSite ? "1rem" : "1.5rem",
             }}
           >
-            In addition to his research in arithmetic geometry, he is interested in using them to conduct applied research in the mathematical sciences, including machine learning and quantum computation.
+            His research interests range from pure mathematics, such as arithmetic geometry and algebraic geometry, to their application to quantum computation and machine learning.
           </Typography>
           <Typography
             sx={{

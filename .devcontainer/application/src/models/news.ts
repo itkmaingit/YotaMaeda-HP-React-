@@ -10,6 +10,6 @@ export const NewsTexts: NewsText[] = [
   },
   {
     date: "Mar 2023",
-    content: "I received my Ph.D. from Kyoto University.",
+    content: "He received my Ph.D. from Kyoto University.",
   },
 ];
