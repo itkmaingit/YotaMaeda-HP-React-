@@ -3,7 +3,21 @@ import { Link, Typography } from "@mui/material";
 
 export const shortCV: Props[] = [
   {
-    period: "Sep 2022-Present",
+    period: "Mar 2025 - present",
+    text: (
+      <Typography
+        component="span"
+        sx={{
+          fontFamily: "Cormorant Garamond, serif",
+          fontSize: "1.2rem",
+        }}
+      >
+        TU Darmstadt
+      </Typography>
+    ),
+  },
+  {
+    period: "Sep 2022-Feb 2025",
     text: (
       <Typography
         component="span"
@@ -24,7 +38,7 @@ export const shortCV: Props[] = [
     ),
   },
   {
-    period: "Apr 2021-Present",
+    period: "Apr 2021-Feb 2025",
     text: (
       <Typography
         component="span"
