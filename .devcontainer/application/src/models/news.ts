@@ -5,7 +5,7 @@ export type NewsText = {
 
 export const NewsTexts: NewsText[] = [
   {
-    date: "Feb 2025",
+    date: "Mar 2025",
     content: "He moved to TU Darmstadt.",
   },
   {
