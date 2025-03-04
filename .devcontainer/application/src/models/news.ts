@@ -6,7 +6,11 @@ export type NewsText = {
 export const NewsTexts: NewsText[] = [
   {
     date: "Feb 2025",
-    content: "He moved to TU Darmstadt",
+    content: "He moved to TU Darmstadt.",
+  },
+  {
+    date: "Feb 2025",
+    content: "He was retiring from Sony and Keio.",
   },
   {
     date: "Mar 2023",
