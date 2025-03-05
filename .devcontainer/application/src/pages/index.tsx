@@ -108,8 +108,7 @@ export default function IndexPage({ fileContents }: Props) {
               marginTop: isMobileSite ? "50px" : "auto",
             }}
           >
-            I am a mathematician and also a researcher at Sony Group
-            Corporation.
+            He is a mathematical scientist.
           </Typography>
           <Typography
             sx={{
@@ -119,7 +118,7 @@ export default function IndexPage({ fileContents }: Props) {
               fontSize: isMobileSite ? "1rem" : "1.5rem",
             }}
           >
-            I received my Ph.D. from Kyoto University in 2023.
+            His research interests range from pure mathematics, such as arithmetic geometry and algebraic geometry, to their application to quantum computation and machine learning.
           </Typography>
           <Typography
             sx={{
