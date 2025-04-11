@@ -17,7 +17,9 @@ type Props = {
   startNumber: number;
 };
 
+
 export default function MiscList({ papers, startNumber }: Props) {
+  console.log(papers)
   return (
     <List>
       {papers.flatMap((paper, i) => [
@@ -31,7 +33,7 @@ export default function MiscList({ papers, startNumber }: Props) {
                   color="text.primary"
                   marginRight="0.5rem"
                 >
-                  {i + startNumber}.
+                  {startNumber === -1 ? '・' : `${i + startNumber}.`}
                 </Typography>
                 <Link
                   href={paper.link}

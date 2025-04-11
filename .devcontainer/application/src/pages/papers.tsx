@@ -23,10 +23,11 @@ type CategorizedPapers = {
   papers: Paper[];
 };
 
-const PapersPage: NextPage<Props> = ({ papers, papersLength, proceedings }) => {
+const PapersPage: NextPage<Props> = ({ papers, papersLength, proceedings, patents }) => {
   const [state, setState] = React.useState({
     isPapers: true,
     isProceedings: true,
+    isPatents: true,
   });
 
   const [startNumber, setStartNumber] = React.useState({
@@ -46,7 +47,7 @@ const PapersPage: NextPage<Props> = ({ papers, papersLength, proceedings }) => {
     });
   }, [state]);
 
-  const { isPapers, isProceedings } = state;
+  const { isPapers, isProceedings, isPatents } = state;
   const { isMobileSite } = useMediaQueryContext();
   return (
     <>
@@ -95,6 +96,22 @@ const PapersPage: NextPage<Props> = ({ papers, papersLength, proceedings }) => {
               }
               label="Proceedings (no peer view)"
             />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isPatents}
+                  onChange={handleChange}
+                  name="isPatents"
+                  sx={{
+                    color: "text.primary",
+                    "&.Mui-checked": {
+                      color: "text.primary",
+                    },
+                  }}
+                />
+              }
+              label="Patents"
+            />
           </FormGroup>
         </FormControl>
       </Container>
@@ -102,7 +119,7 @@ const PapersPage: NextPage<Props> = ({ papers, papersLength, proceedings }) => {
         {isPapers && (
           <Container sx={{ marginBottom: "3em" }}>
             <Typography variant="h4" sx={{ marginBottom: "1em" }}>
-              Papers
+              Journal articles, peer-reviewed conference papers, or preprints
             </Typography>
             {Object.keys(papers).map((category) => (
               <PaperList
@@ -116,14 +133,23 @@ const PapersPage: NextPage<Props> = ({ papers, papersLength, proceedings }) => {
         )}
         {isProceedings && (
           <Container sx={{ marginBottom: "3em" }}>
-            <Typography variant="h4">Proceedings</Typography>
+            <Typography variant="h4">Non-peer-reviewed conference proceedings</Typography>
             <MiscList
               papers={proceedings}
               startNumber={startNumber.proceedings}
             ></MiscList>
           </Container>
         )}
-        {!isPapers && !isProceedings && (
+        {isPatents && (
+          <Container sx={{ marginBottom: "3em" }}>
+            <Typography variant="h4">Patents</Typography>
+            <MiscList
+              papers={patents}
+              startNumber={-1}
+            ></MiscList>
+          </Container>
+        )}
+        {!isPapers && !isProceedings && !isPatents && (
           <Container css={centerAlignStyle} sx={{ marginTop: "5em" }}>
             <Typography variant="body1" color="red">
               Check some contents.
@@ -164,12 +190,16 @@ export const getStaticProps = async () => {
   const proceedings: Misc[] = miscData.contents.filter((val: Misc) => {
     return val.papersType[0] === "proceedings";
   });
+  const patents: Misc[] = miscData.contents.filter((val: Misc) => {
+    return val.papersType[0] === "patents";
+  });
 
   return {
     props: {
       papers: papers,
       papersLength: papersLength,
       proceedings: proceedings,
+      patents: patents
     },
     revalidate: 120,
   };

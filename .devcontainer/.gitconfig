@@ -46,4 +46,4 @@
 	stl = stash list
 	stps = stash pop "stash@{0}"
 [credential]
-	helper = "!f() { /home/node/.vscode-server/bin/dc96b837cf6bb4af9cd736aa3af08cf8279f7685/node /tmp/vscode-remote-containers-58be1a6a-bb7c-4e99-b5d1-3716247307ea.js git-credential-helper $*; }; f"
+	helper = "!f() { /home/node/.vscode-server/bin/ddc367ed5c8936efe395cffeec279b04ffd7db78/node /tmp/vscode-remote-containers-eb50d4ea-4b8e-46ab-9e04-b1a93ef37b9f.js git-credential-helper $*; }; f"
