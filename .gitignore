@@ -6,3 +6,5 @@
 .devcontainer/.gnupg/*
 .devcontainer/.ssh/*
 .node_repl_history
+.env
+.bash_history

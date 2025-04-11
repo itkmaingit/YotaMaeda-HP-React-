@@ -3,6 +3,7 @@ import { centerAlignStyle } from "@/styles/utilStyle";
 import { css } from "@emotion/react";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import ScienceIcon from "@mui/icons-material/Science";
 import {
   Button,
@@ -76,6 +77,25 @@ export default function Footer() {
                 style={{ textTransform: "none" }}
               >
                 Researchmap
+              </Button>
+            }
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <LinkedInIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Button
+                href="https://jp.linkedin.com/in/yota-maeda"
+                color="primary"
+                size="large"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textTransform: "none" }}
+              >
+                Linkedin
               </Button>
             }
           />
