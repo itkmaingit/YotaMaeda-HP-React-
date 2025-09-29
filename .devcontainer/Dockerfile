@@ -9,3 +9,9 @@ RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 
 USER $USERNAME
 COPY . /home/$USERNAME
+
+WORKDIR /home/$USERNAME/application
+
+RUN sudo npm install --force
+
+CMD [ "npm", "run", "dev" ]

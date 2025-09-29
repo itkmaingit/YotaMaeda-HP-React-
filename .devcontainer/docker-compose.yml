@@ -12,6 +12,7 @@ services:
 
     working_dir: "/home/node/application"
     tty: true
+    stdin_open: true
 
 volumes:
   exception-volumes:
