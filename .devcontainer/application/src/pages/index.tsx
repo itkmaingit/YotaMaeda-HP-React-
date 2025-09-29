@@ -118,7 +118,12 @@ export default function IndexPage({ fileContents }: Props) {
               fontSize: isMobileSite ? "1rem" : "1.5rem",
             }}
           >
-            His research interests range from pure mathematics, such as arithmetic geometry and algebraic geometry, to their application to quantum computation and machine learning.
+            His research interests range from pure mathematics, such as arithmetic geometry and algebraic geometry, to their application to quantum computation and machine learning. See             <Link
+              href="https://www.linkedin.com/posts/technische-universitat-darmstadt_forschung-verbindet-menschen-und-ideen-activity-7376600926306086912-HgRQ"
+              sx={{ color: "text.primary", textDecoration: "underline" }}
+            >
+              my interview.
+            </Link>
           </Typography>
           <Typography
             sx={{
