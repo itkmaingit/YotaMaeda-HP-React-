@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:22
 # Install basic development tools
 RUN apt update && apt install -y less man-db sudo
 
@@ -9,3 +9,9 @@ RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 
 USER $USERNAME
 COPY . /home/$USERNAME
+
+WORKDIR /home/$USERNAME/application
+
+RUN sudo npm install --force
+
+CMD [ "npm", "run", "dev" ]

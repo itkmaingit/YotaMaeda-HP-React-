@@ -12,7 +12,7 @@ export const shortCV: Props[] = [
           fontSize: "1.2rem",
         }}
       >
-        Researcher at TU Darmstat as the  Alexander von Humboldt Foundation Postdoctoral Fellow.
+        Researcher at TU Darmstadt as the  Alexander von Humboldt Foundation Postdoctoral Fellow.
       </Typography>
     ),
   },
