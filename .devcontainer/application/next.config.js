@@ -17,6 +17,15 @@ const nextConfig = {
     };
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        destination: 'https://yota-maeda.pages.dev',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;
